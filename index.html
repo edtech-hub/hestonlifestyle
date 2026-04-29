@@ -236,6 +236,49 @@
         }
         nav a:hover { color: var(--gold); }
         nav a:hover::after { width: 100%; }
+
+        /* Submenu (Services dropdown) */
+        nav .has-submenu { position: relative; }
+        nav .submenu {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%) translateY(-8px);
+            background: rgba(15,15,15,0.97);
+            border: 1px solid rgba(201,169,98,0.18);
+            border-radius: 6px;
+            padding: 0.6rem 0;
+            min-width: 220px;
+            display: flex !important;
+            flex-direction: column;
+            gap: 0;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: all 0.25s ease;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+            z-index: 100;
+        }
+        nav .has-submenu:hover .submenu,
+        nav .has-submenu:focus-within .submenu {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateX(-50%) translateY(0);
+        }
+        nav .submenu li { width: 100%; }
+        nav .submenu a {
+            display: block;
+            padding: 0.7rem 1.4rem;
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            white-space: nowrap;
+            text-align: left;
+        }
+        nav .submenu a::after { display: none; }
+        nav .submenu a:hover { color: var(--gold); background: rgba(201,169,98,0.08); }
+
         .nav-cta {
             padding: 0.75rem 1.5rem;
             background: transparent;
@@ -983,6 +1026,21 @@
             nav.active { transform: translateX(0); }
             nav ul { flex-direction: column; gap: 2rem; text-align: center; }
             nav a { font-size: 1rem; }
+            /* Mobile: show submenu inline */
+            nav .submenu {
+                position: static;
+                transform: none;
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                background: transparent;
+                border: none;
+                box-shadow: none;
+                padding: 0.8rem 0 0;
+                min-width: 0;
+                gap: 0.6rem;
+            }
+            nav .submenu a { text-align: center; font-size: 0.78rem; padding: 0.4rem 0; }
             .hero { padding: 6rem 1.25rem 3rem; }
             .hero-grid { grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(4, 1fr); }
             .form-row { grid-template-columns: 1fr; gap: 1rem; }
@@ -1033,7 +1091,19 @@
             <nav id="nav">
                 <ul>
                     <li><a href="#home">Home</a></li>
-                    <li><a href="#services">Services</a></li>
+                    <li class="has-submenu">
+                        <a href="#services">Services <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10" style="display:inline;vertical-align:middle;margin-left:4px;"><polyline points="6 9 12 15 18 9"/></svg></a>
+                        <ul class="submenu">
+                            <li><a href="services/headshots.html">Headshots</a></li>
+                            <li><a href="services/family.html">Family Photography</a></li>
+                            <li><a href="services/sport.html">Sport</a></li>
+                            <li><a href="services/schools.html">Schools</a></li>
+                            <li><a href="services/events.html">Events</a></li>
+                            <li><a href="services/product.html">Product</a></li>
+                            <li><a href="services/food.html">Food</a></li>
+                            <li><a href="services/property.html">Property</a></li>
+                        </ul>
+                    </li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#portfolio">Portfolio</a></li>
                     <li><a href="https://hestonphoto.com" target="_blank" rel="noopener">Weddings</a></li>
@@ -1079,10 +1149,102 @@
                 <a href="#services" class="btn btn-outline">View Services</a>
             </div>
         </div>
-        <a href="#about" class="hero-scroll" aria-label="Scroll down">
+        <a href="#services" class="hero-scroll" aria-label="Scroll down">
             Discover
             <span class="hero-scroll-line"></span>
         </a>
+    </section>
+
+    <!-- Services -->
+    <section class="services-section" id="services">
+        <div class="section-container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-label">What We Do</span>
+                <h2 class="section-title">Our <em>Specialisms</em></h2>
+                <p class="section-subtitle">Eight focused photography services — each delivered by a specialist within our team. Click any service for details and recent work.</p>
+            </div>
+            <div class="services-grid">
+                <a href="services/headshots.html" class="service-card" data-aos="fade-up" data-aos-delay="50">
+                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&h=900&fit=crop" alt="Headshots" class="service-card-img" loading="lazy">
+                    <div class="service-card-content">
+                        <span class="service-card-tag">01 · Corporate</span>
+                        <h3>Headshots</h3>
+                        <p>Polished, on-brand portraits for executives, teams and personal brands. Studio or on-site, individual or full company rosters.</p>
+                        <span class="service-card-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+                    </div>
+                </a>
+
+                <a href="services/family.html" class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=800&h=900&fit=crop" alt="Family Photography" class="service-card-img" loading="lazy">
+                    <div class="service-card-content">
+                        <span class="service-card-tag">02 · Lifestyle</span>
+                        <h3>Family Photography</h3>
+                        <p>Relaxed, child-friendly family sessions in your home, garden or favourite outdoor location. Beautiful albums and prints available.</p>
+                        <span class="service-card-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+                    </div>
+                </a>
+
+                <a href="services/sport.html" class="service-card" data-aos="fade-up" data-aos-delay="150">
+                    <img src="https://images.unsplash.com/photo-1530023367847-a683933f4172?w=800&h=900&fit=crop" alt="Sport Photography" class="service-card-img" loading="lazy">
+                    <div class="service-card-content">
+                        <span class="service-card-tag">03 · Action</span>
+                        <h3>Sport Photography</h3>
+                        <p>Dynamic action coverage of fixtures, training, tournaments and team portraits — for clubs, schools and athletes.</p>
+                        <span class="service-card-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+                    </div>
+                </a>
+
+                <a href="services/schools.html" class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1564644014708-0e2bc4e8d3f8?w=800&h=900&fit=crop" alt="Schools Photography" class="service-card-img" loading="lazy">
+                    <div class="service-card-content">
+                        <span class="service-card-tag">04 · Education</span>
+                        <h3>Schools Photography</h3>
+                        <p>Class portraits, prospectus shoots, life-on-campus imagery and event coverage — for nurseries, primaries, secondaries and independents.</p>
+                        <span class="service-card-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+                    </div>
+                </a>
+
+                <a href="services/events.html" class="service-card" data-aos="fade-up" data-aos-delay="250">
+                    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&h=900&fit=crop" alt="Events Photography" class="service-card-img" loading="lazy">
+                    <div class="service-card-content">
+                        <span class="service-card-tag">05 · Live</span>
+                        <h3>Events</h3>
+                        <p>Conferences, launches, galas, parties and brand activations — capturing atmosphere, key moments and the people that matter.</p>
+                        <span class="service-card-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+                    </div>
+                </a>
+
+                <a href="services/product.html" class="service-card" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=900&fit=crop" alt="Product Photography" class="service-card-img" loading="lazy">
+                    <div class="service-card-content">
+                        <span class="service-card-tag">06 · E-Commerce</span>
+                        <h3>Product Photography</h3>
+                        <p>Studio-grade product imagery for e-commerce, lookbooks, packaging and PR. White background, lifestyle and creative still life.</p>
+                        <span class="service-card-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+                    </div>
+                </a>
+
+                <a href="services/food.html" class="service-card" data-aos="fade-up" data-aos-delay="350">
+                    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=900&fit=crop" alt="Food Photography" class="service-card-img" loading="lazy">
+                    <div class="service-card-content">
+                        <span class="service-card-tag">07 · Hospitality</span>
+                        <h3>Food Photography</h3>
+                        <p>Editorial food and drink imagery for restaurants, hotels, cookbooks, menus and brand campaigns. Stylist available on request.</p>
+                        <span class="service-card-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+                    </div>
+                </a>
+
+                <a href="services/property.html" class="service-card" data-aos="fade-up" data-aos-delay="400">
+                    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=900&fit=crop" alt="Property Photography" class="service-card-img" loading="lazy">
+                    <div class="service-card-content">
+                        <span class="service-card-tag">08 · Real Estate</span>
+                        <h3>Property Photography</h3>
+                        <p>Architectural and interiors imagery for estate agents, developers, hotels and short-let hosts. Drone &amp; twilight available.</p>
+                        <span class="service-card-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+                    </div>
+                </a>
+            </div>
+        </div>
     </section>
 
     <!-- Intro / About -->
@@ -1117,98 +1279,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services -->
-    <section class="services-section" id="services">
-        <div class="section-container">
-            <div class="section-header" data-aos="fade-up">
-                <span class="section-label">What We Do</span>
-                <h2 class="section-title">Our <em>Specialisms</em></h2>
-                <p class="section-subtitle">Eight focused photography services — each delivered by a specialist within our team. Hover any service to learn more.</p>
-            </div>
-            <div class="services-grid">
-                <a href="#contact" class="service-card" data-aos="fade-up" data-aos-delay="50">
-                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&h=900&fit=crop" alt="Headshots" class="service-card-img" loading="lazy">
-                    <div class="service-card-content">
-                        <span class="service-card-tag">01 · Corporate</span>
-                        <h3>Headshots</h3>
-                        <p>Polished, on-brand portraits for executives, teams and personal brands. Studio or on-site, individual or full company rosters.</p>
-                        <span class="service-card-link">Enquire <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-                    </div>
-                </a>
-
-                <a href="#contact" class="service-card" data-aos="fade-up" data-aos-delay="100">
-                    <img src="https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=800&h=900&fit=crop" alt="Family Photography" class="service-card-img" loading="lazy">
-                    <div class="service-card-content">
-                        <span class="service-card-tag">02 · Lifestyle</span>
-                        <h3>Family Photography</h3>
-                        <p>Relaxed, child-friendly family sessions in your home, garden or favourite outdoor location. Beautiful albums and prints available.</p>
-                        <span class="service-card-link">Enquire <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-                    </div>
-                </a>
-
-                <a href="#contact" class="service-card" data-aos="fade-up" data-aos-delay="150">
-                    <img src="https://images.unsplash.com/photo-1530023367847-a683933f4172?w=800&h=900&fit=crop" alt="Sport Photography" class="service-card-img" loading="lazy">
-                    <div class="service-card-content">
-                        <span class="service-card-tag">03 · Action</span>
-                        <h3>Sport Photography</h3>
-                        <p>Dynamic action coverage of fixtures, training, tournaments and team portraits — for clubs, schools and athletes.</p>
-                        <span class="service-card-link">Enquire <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-                    </div>
-                </a>
-
-                <a href="#contact" class="service-card" data-aos="fade-up" data-aos-delay="200">
-                    <img src="https://images.unsplash.com/photo-1564644014708-0e2bc4e8d3f8?w=800&h=900&fit=crop" alt="Schools Photography" class="service-card-img" loading="lazy">
-                    <div class="service-card-content">
-                        <span class="service-card-tag">04 · Education</span>
-                        <h3>Schools Photography</h3>
-                        <p>Class portraits, prospectus shoots, life-on-campus imagery and event coverage — for nurseries, primaries, secondaries and independents.</p>
-                        <span class="service-card-link">Enquire <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-                    </div>
-                </a>
-
-                <a href="#contact" class="service-card" data-aos="fade-up" data-aos-delay="250">
-                    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&h=900&fit=crop" alt="Events Photography" class="service-card-img" loading="lazy">
-                    <div class="service-card-content">
-                        <span class="service-card-tag">05 · Live</span>
-                        <h3>Events</h3>
-                        <p>Conferences, launches, galas, parties and brand activations — capturing atmosphere, key moments and the people that matter.</p>
-                        <span class="service-card-link">Enquire <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-                    </div>
-                </a>
-
-                <a href="#contact" class="service-card" data-aos="fade-up" data-aos-delay="300">
-                    <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=900&fit=crop" alt="Product Photography" class="service-card-img" loading="lazy">
-                    <div class="service-card-content">
-                        <span class="service-card-tag">06 · E-Commerce</span>
-                        <h3>Product Photography</h3>
-                        <p>Studio-grade product imagery for e-commerce, lookbooks, packaging and PR. White background, lifestyle and creative still life.</p>
-                        <span class="service-card-link">Enquire <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-                    </div>
-                </a>
-
-                <a href="#contact" class="service-card" data-aos="fade-up" data-aos-delay="350">
-                    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=900&fit=crop" alt="Food Photography" class="service-card-img" loading="lazy">
-                    <div class="service-card-content">
-                        <span class="service-card-tag">07 · Hospitality</span>
-                        <h3>Food Photography</h3>
-                        <p>Editorial food and drink imagery for restaurants, hotels, cookbooks, menus and brand campaigns. Stylist available on request.</p>
-                        <span class="service-card-link">Enquire <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-                    </div>
-                </a>
-
-                <a href="#contact" class="service-card" data-aos="fade-up" data-aos-delay="400">
-                    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=900&fit=crop" alt="Property Photography" class="service-card-img" loading="lazy">
-                    <div class="service-card-content">
-                        <span class="service-card-tag">08 · Real Estate</span>
-                        <h3>Property Photography</h3>
-                        <p>Architectural and interiors imagery for estate agents, developers, hotels and short-let hosts. Drone &amp; twilight available.</p>
-                        <span class="service-card-link">Enquire <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-                    </div>
-                </a>
             </div>
         </div>
     </section>
@@ -1316,10 +1386,10 @@
                         <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                         <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                     </div>
-                    <p class="quote">"The album quality is exceptional — beautifully bound and printed. The team's attention to detail showed at every stage, from the shoot through to delivery."</p>
+                    <p class="quote">"We can't thank Heston enough for the quality of the photos they took, their dedication and being amazing to work with. The album quality is exceptional — beautifully bound and printed."</p>
                     <div class="testimonial-author">
-                        <span class="name">Anita R.</span>
-                        <span class="role">Family Session</span>
+                        <span class="name">Krina &amp; Nishul</span>
+                        <span class="role">Wedding &amp; Pre-Shoot</span>
                     </div>
                 </div>
 
@@ -1331,10 +1401,10 @@
                         <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                         <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                     </div>
-                    <p class="quote">"Professional yet completely relaxed. Our team felt at ease throughout the headshot day, which absolutely shows in the final imagery."</p>
+                    <p class="quote">"Simply Incredible! I struggle to put into words how lucky we are to have chosen Heston. The pre-shoot images came out beautifully — sexy, glamorous and exactly what we hoped for."</p>
                     <div class="testimonial-author">
-                        <span class="name">James M.</span>
-                        <span class="role">Corporate Headshots</span>
+                        <span class="name">Roshni Vekaria</span>
+                        <span class="role">Pre-Shoot</span>
                     </div>
                 </div>
 
@@ -1346,10 +1416,10 @@
                         <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                         <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                     </div>
-                    <p class="quote">"Wonderfully child-friendly approach — they had patience and humour with our two little ones, and the natural, emotional photography we got back was perfect."</p>
+                    <p class="quote">"Your relaxed and child-friendly approach allowed our son to feel completely at ease and enjoy the experience. The natural, emotional photography we got back was perfect."</p>
                     <div class="testimonial-author">
-                        <span class="name">Sarah &amp; Daniel</span>
-                        <span class="role">Newborn &amp; Family</span>
+                        <span class="name">Nevin &amp; Durga</span>
+                        <span class="role">Family Session</span>
                     </div>
                 </div>
 
@@ -1361,10 +1431,10 @@
                         <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                         <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                     </div>
-                    <p class="quote">"They captured the whole atmosphere of our event — the energy, the smaller moments, everything. The gallery has been a brilliant asset for our marketing."</p>
+                    <p class="quote">"Heston was professional and didn't let photo-taking interfere with us enjoying the party! They captured the whole atmosphere — the energy, the smaller moments, everything."</p>
                     <div class="testimonial-author">
-                        <span class="name">Priya N.</span>
-                        <span class="role">Brand Launch Event</span>
+                        <span class="name">Kiran Dhesi</span>
+                        <span class="role">Birthday Event</span>
                     </div>
                 </div>
             </div>
@@ -1399,7 +1469,7 @@
                             </div>
                             <div class="contact-item-content">
                                 <div class="label">Email</div>
-                                <a href="mailto:info.hestonphoto@gmail.com">info.hestonphoto@gmail.com</a>
+                                <a href="mailto:info@hestonphoto.co.uk">info@hestonphoto.co.uk</a>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -1484,7 +1554,7 @@
                     <p>A creative team of corporate and commercial photographers based in London. Making your people, products and spaces look amazing — with affordable prices and excellent service.</p>
                     <div class="footer-contact-inline">
                         <a href="tel:+442084329898"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>020 8432 9898</a>
-                        <a href="mailto:info.hestonphoto@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>info.hestonphoto@gmail.com</a>
+                        <a href="mailto:info@hestonphoto.co.uk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>info@hestonphoto.co.uk</a>
                     </div>
                     <div class="footer-social">
                         <a href="https://www.instagram.com/hestonphoto" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
@@ -1502,12 +1572,14 @@
                 <div class="footer-links">
                     <h4>Services</h4>
                     <ul>
-                        <li><a href="#services">Headshots</a></li>
-                        <li><a href="#services">Family</a></li>
-                        <li><a href="#services">Events</a></li>
-                        <li><a href="#services">Product</a></li>
-                        <li><a href="#services">Food</a></li>
-                        <li><a href="#services">Property</a></li>
+                        <li><a href="services/headshots.html">Headshots</a></li>
+                        <li><a href="services/family.html">Family</a></li>
+                        <li><a href="services/sport.html">Sport</a></li>
+                        <li><a href="services/schools.html">Schools</a></li>
+                        <li><a href="services/events.html">Events</a></li>
+                        <li><a href="services/product.html">Product</a></li>
+                        <li><a href="services/food.html">Food</a></li>
+                        <li><a href="services/property.html">Property</a></li>
                     </ul>
                 </div>
 
