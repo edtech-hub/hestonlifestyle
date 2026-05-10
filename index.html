@@ -96,6 +96,7 @@
             --gold-light: #E8D5B7;
             --gold-dark: #8B7355;
             --cream: #FAF7F2;
+            --cream-dark: #EDE7DC;
             --charcoal: #2C2C2C;
             --charcoal-light: #3D3D3D;
             --white: #FFFFFF;
@@ -177,23 +178,25 @@
             position: fixed;
             top: 0; left: 0; right: 0;
             z-index: 1000;
-            background: transparent;
-            padding: 1.5rem 0;
-            transition: all 0.4s ease;
-        }
-        header.scrolled {
             background: rgba(250, 247, 242, 0.96);
             backdrop-filter: blur(20px);
             padding: 0.75rem 0;
             box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
             border-bottom: 1px solid rgba(0,0,0,0.05);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
         }
-        header.scrolled nav a { color: var(--charcoal); }
-        header.scrolled nav a:hover { color: var(--gold-dark); }
-        header.scrolled .nav-cta { color: var(--gold-dark) !important; }
-        header.scrolled .nav-cta:hover { color: var(--white) !important; background: var(--gold); }
-        header.scrolled .logo h1 { color: var(--charcoal); }
-        header.scrolled .mobile-menu-toggle span { background: var(--charcoal); }
+        header.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        header nav a { color: var(--charcoal); }
+        header nav a:hover { color: var(--gold-dark); }
+        header .nav-cta { color: var(--gold-dark) !important; }
+        header .nav-cta:hover { color: var(--white) !important; background: var(--gold); }
+        header .logo h1 { color: var(--charcoal); }
+        header .mobile-menu-toggle span { background: var(--charcoal); }
         .header-container {
             max-width: 1400px;
             margin: 0 auto;
@@ -316,7 +319,7 @@
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 25%, #252525 50%, #1a1a1a 75%, #0a0a0a 100%);
             color: var(--white);
             text-align: center;
-            padding: 7rem 2rem 4rem;
+            padding: 2rem 2rem 4rem;
         }
         .hero::before {
             content: '';
@@ -342,7 +345,7 @@
         .hero-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.65) 100%);
+            background: linear-gradient(180deg, rgba(120,120,120,0) 0%, rgba(100,100,100,0) 100%);
             z-index: 2;
         }
         .hero-content {
@@ -351,17 +354,18 @@
             max-width: 900px;
         }
         .hero-tag {
-            font-size: 0.7rem;
+            font-size: 1rem;
             font-weight: 600;
             letter-spacing: 0.35em;
             text-transform: uppercase;
             color: var(--gold);
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
         }
         .hero-logo-img {
-            height: clamp(80px, 15vmin, 140px);
+            height: clamp(120px, 25vmin, 220px);
             width: auto;
-            margin: 0 auto 1.5rem;
+            margin: 0 auto 0rem;
             display: block;
         }
         .hero h1 {
@@ -369,6 +373,7 @@
             font-weight: 400;
             line-height: 1.05;
             margin-bottom: 1.5rem;
+            text-shadow: 0 3px 12px rgba(0,0,0,0.6);
         }
         .hero h1 em { font-style: italic; color: var(--gold); }
         .hero-tagline {
@@ -380,6 +385,7 @@
             max-width: 720px;
             margin: 0 auto 2.5rem;
             line-height: 1.6;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
         }
         .hero-cta-row {
             display: flex;
@@ -747,7 +753,7 @@
 
         /* Testimonials */
         .testimonials-section {
-            background: var(--cream);
+            background: var(--cream-dark);
             position: relative;
             overflow: hidden;
             color: var(--charcoal);
@@ -766,11 +772,20 @@
         .testimonials-section .section-container { position: relative; z-index: 1; }
         .testimonials-section .section-title { color: var(--charcoal); }
         .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            display: flex;
+            flex-wrap: wrap;
             gap: 1.5rem;
             max-width: 1200px;
             margin: 0 auto;
+            justify-content: center;
+        }
+        .testimonial-card {
+            flex: 0 1 calc(33.333% - 1rem);
+            min-width: 280px;
+        }
+        .testimonial-card:nth-child(4),
+        .testimonial-card:nth-child(5) {
+            flex: 0 1 calc(33.333% - 1rem);
         }
         .testimonial-card {
             background: #fff;
@@ -829,9 +844,12 @@
         }
         .contact-grid {
             display: grid;
-            grid-template-columns: 1fr 1.4fr;
+            grid-template-columns: 1fr 2fr;
             gap: 4rem;
             align-items: start;
+        }
+        .contact-info {
+            padding-left: 3rem;
         }
         .contact-info h3 {
             font-size: 2rem;
@@ -880,6 +898,8 @@
             padding: 2.5rem;
             border-radius: 20px;
             box-shadow: 0 30px 70px rgba(0,0,0,0.08);
+            max-width: 100%;
+            margin-left: auto;
         }
         .contact-form { display: grid; gap: 1.25rem; }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
@@ -1123,7 +1143,7 @@
                     <li><a href="#about">About</a></li>
                     <li><a href="#portfolio">Portfolio</a></li>
                     <li><a href="https://hestonphoto.com" target="_blank" rel="noopener">Weddings</a></li>
-                    <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+                    <li><a href="https://clients.hestonphotographics.com" target="_blank" rel="noopener" class="nav-cta">Customer Portal</a></li>
                 </ul>
             </nav>
             <div class="mobile-menu-toggle" id="mobileMenuToggle">
@@ -1453,6 +1473,21 @@
                         <span class="role">Birthday Event</span>
                     </div>
                 </div>
+
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="250">
+                    <div class="testimonial-stars">
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    </div>
+                    <p class="quote">"From start to finish, working with Heston Photo was seamless. Their expertise in product photography transformed our brand imagery. Highly recommended for any business looking to elevate their visual presence."</p>
+                    <div class="testimonial-author">
+                        <span class="name">Sarah Mitchell</span>
+                        <span class="role">Product Photography</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1604,7 +1639,7 @@
                     <ul>
                         <li><a href="#about">About Us</a></li>
                         <li><a href="#portfolio">Portfolio</a></li>
-                        <li><a href="#contact">Get a Quote</a></li>
+                        <li><a href="https://clients.hestonphotographics.com" target="_blank" rel="noopener">Customer Portal</a></li>
                         <li><a href="https://hestonphoto.com" target="_blank" rel="noopener">Weddings</a></li>
                         <li><a href="https://clients.hestonphotographics.com" target="_blank" rel="noopener">Client Login</a></li>
                     </ul>
@@ -1624,8 +1659,10 @@
             <div class="footer-bottom">
                 <p class="footer-copyright">© 2026 Heston Photo Lifestyle. All rights reserved.</p>
                 <div class="footer-legal">
+                    <a href="/terms.html">Terms of Use</a>
+                    <a href="/privacy.html">Privacy Policy</a>
+                    <a href="/cookies.html">Cookie Policy</a>
                     <a href="https://hestonphoto.com" target="_blank" rel="noopener">Wedding Site</a>
-                    <a href="#contact">Contact</a>
                 </div>
             </div>
         </div>
@@ -1658,12 +1695,25 @@
         if (document.readyState === 'complete') initAOS();
         else window.addEventListener('load', initAOS);
 
-        // Header scroll effect
+        // Header scroll effect - show on scroll past hero
         const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) header.classList.add('scrolled');
-            else header.classList.remove('scrolled');
-        }, { passive: true });
+        const hero = document.querySelector('.hero');
+        let hasScrolled = false;
+
+        function checkHeaderVisibility() {
+            const heroBottom = hero.offsetHeight;
+            const scrollTop = window.scrollY;
+            
+            if (scrollTop > heroBottom && !hasScrolled) {
+                header.classList.add('visible');
+                hasScrolled = true;
+            } else if (scrollTop <= heroBottom && hasScrolled) {
+                header.classList.remove('visible');
+                hasScrolled = false;
+            }
+        }
+
+        window.addEventListener('scroll', checkHeaderVisibility, { passive: true });
 
         // Mobile menu toggle
         const toggle = document.getElementById('mobileMenuToggle');
